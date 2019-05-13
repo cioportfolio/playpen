@@ -7,10 +7,16 @@ if ! hash node 2>/dev/null; then
   sudo apt-get -y install curl zip unzip
   
   echo "Setup node source"
-  curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
   
   echo "install node"
   sudo apt-get install -y nodejs
+
+  echo "install npm"
+  sudo apt-get install -y npm
+  
+  echo "install postgres tools"
+  sudo apt-get install -y postgresql-client-common
   
   echo "Switch to project folder"
   cd /vagrant
