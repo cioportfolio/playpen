@@ -1,2 +1,2 @@
 # node-postgres
-Basic app template
+Basic web app/api prototyping template using node.js, express and PostgreSQL

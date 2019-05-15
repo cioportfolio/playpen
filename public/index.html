@@ -1,0 +1,6 @@
+<h1>Hello world</h1>
+<h2>Data</h2>
+<div id=data></div>
+<script>
+    fetch('/items').then(res => res.json()).then(data => document.getElementById('data').innerHTML=JSON.stringify(data,null,2))
+</script>
