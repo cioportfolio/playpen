@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "Basic express interface to postgres",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.16.4",
     "pg": "^7.11.0"
