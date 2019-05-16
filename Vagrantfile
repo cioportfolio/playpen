@@ -24,10 +24,11 @@ Vagrant.configure("2") do |config|
 	  mount --bind /vagrant_node_modules /vagrant/node_modules
 	SHELL
   config.vm.provision :shell, privileged: false, path: "bootstrap.sh"
-  config.vm.provision :shell, provileged: false, run: "always", inline: <<-SHELL
+  config.vm.provision :shell, privileged: false, run: "always", inline: <<-SHELL
     echo "Starting server"
     cd /vagrant
-    node server.js
+    nohup node server.js &>/vagrant/node.log & 2>/vagrant/node_error.log &
+    echo "Server started"
   SHELL
 
   # Disable automatic box update checking. If you disable this, then
