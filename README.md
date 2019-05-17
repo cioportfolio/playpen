@@ -16,11 +16,13 @@ Download and install `VirtualBox` which is a utility for a sandbox so that your 
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-Download and install `Vagrant` which is a utility which does a load of hard work to configure the sandbox for your app.
+Download and install `Vagrant` which is a utility which does a load of hard work to configure the playpen for your app.
 
 ```
 https://www.vagrantup.com/downloads.html
 ```
+
+**Optional:**
 
 You can do all of your coding in a text editor but there are some utilities which can do clever things like format your code, spot errors etc. Microsoft's editor is really good and works on Macs too.
 
@@ -28,14 +30,21 @@ You can do all of your coding in a text editor but there are some utilities whic
 https://code.visualstudio.com/download
 ```
 
+You can use a variety of utilities to manage the database that runs in the playpen. There is a tool specially designed for database included in this playpen.
+
+```
+https://www.pgadmin.org/download/
+```
+
+
 ## Using the command line
 You will need to use your computers command line a little. On Windows type `cmd` into the search box to get to the command line. On Mac you can start the `terminal` app from the launcher or the applications folder. The VSCode editor has a built in terminal which you can use if you prefer.
 
 Your favourite search engine will help you find lists of commands and explain error messages and how to fix anything that goes wrong.
 
-## Setting up the sandbox
+## Setting up the playpen
 
-Start up your command line and type in this command to download a copy of the sandbox software:
+Start up your command line and type in this command to download a copy of the playpen software:
 
 ```
 git clone git@github.com:cioportfolio/playpen.git myapp
@@ -47,7 +56,7 @@ Typing `dir` (or `ls` on a Mac) will show a list of your folder and you will see
 cd myapp
 ```
 
-Typing `dir` (or `ls`) will reveal a load of files for the sandbox. We will explain what these are later. For now let's get the sandbox going.
+Typing `dir` (or `ls`) will reveal a load of files for the playpen. We will explain what these are later. For now let's get the playpen going.
 
 Type the following command:
 
@@ -77,23 +86,23 @@ You should see a very ugly web page like this:
 > ## Data
 >[ { "id": 1, "notes": "Test message" } ]
 
-Congratulations! The sandbox is running and you can use it to develop your apps.
+Congratulations! The playpen is running and you can use it to develop your apps.
 
 ## Basic Controls
 
 You have already seen what `vagrant up` can do. Here are a few more basic commands.
 
-`vagrant halt` will shutdown the sandbox so that it doesn't slow down your machine or drain the battery.
+`vagrant halt` will shutdown the playpen so that it doesn't slow down your machine or drain the battery.
 
-`vagrant destroy` will shutdown and delete the sandbox. You might want to do this if you mess something up and want to reset the sandbox.
+`vagrant destroy` will shutdown and delete the playpen. You might want to do this if you mess something up and want to reset the playpen.
 
-After these commands `vagrant up` will get things going again. It will know if you have halted or destroyed the sandbox and do the minimum it needs to get running again.
+After these commands `vagrant up` will get things going again. It will know if you have halted or destroyed the playpen and do the minimum it needs to get running again.
 
-`vagrant ssh` will log you into the sandbox and start its command line so you can run other commands. The sandbox is actually a unix computer running inside you laptop. You can find out how to use it on the web.
+`vagrant ssh` will log you into the playpen and start its command line so you can run other commands. The playpen is actually a unix computer running inside you laptop. You can find out how to use it on the web.
 
-## Sandbox content
+## Playpen content
 
-This is an overview of what is in the sandbox and what you can do with it. The components are amongst the most popular internet tools so you will find extensive user guides, online training, example code and plenty of help online.
+This is an overview of what is in the playpen and what you can do with it. The components are amongst the most popular internet tools so you will find extensive user guides, online training, example code and plenty of help online.
 
 ### public folder
 
@@ -103,21 +112,20 @@ Any files you want to be part of your website can go in the `public` folder. E.g
 localhost:3000/test.html
 ```
 
-By default the sandbox will display `index.html` which is how you got to the ugly test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
+By default the playpen will display `index.html` which is how you got to the ugly test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
 
 ### Express framework
 
-The sandbox includes a simple web and api framework called express. There are lots of different frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `index.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption.
+The playpen includes a simple web and api framework called express. There are lots of different frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `index.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption.
 
 ### PostgreSQL dababase
 
-The sandbox also includes the PostgresSQL database. `queries.js` includes and example of accessing the database which is used by the example api in `server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
+The playpen also includes the PostgresSQL database. `queries.js` includes and example of accessing the database which is used by the example api in `server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
 
-**Note**: if you use `vagrant destroy` you will loose any new data or data structures you have put into the database but see the next section.
+**Note**: if you use `vagrant destroy` you will loose any new data or data structures you have put into the database. You can use a tool like pgadmin (see earlier in this guide) to save and load the data and you can also use scripts (see the next section).
 
 ### Vagrant configuration
 
-`bootstrap.sh` is a unix script which does most of the hardwork when you ran `vagrant up` for the first time. Changing this is probably not for beginners but the vagrant website includes extensive how-to guides. You can change `bootstrap.sh` and rebuild the sandbox with additional software or different components e.g. different databases and server frameworks.
+`provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks.
 
-`Vagrantfile` provides the basic information which vagrant uses to build the sandbox, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS. If you want to preserve the data in your database you can use the `Vagrantfile` to define shutdown and startup instructions to save and reload the data.
-
+`Vagrantfile` provides the basic information which vagrant uses to build the playpen, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS. If you want to preserve the data in your database you can use the `Vagrantfile` to define shutdown and startup instructions to save and reload the data.
