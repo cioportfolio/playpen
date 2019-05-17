@@ -1,30 +1,5 @@
 #!/usr/bin/env bash
 
-sudo apt-get update
-echo "Test if node already installed"
-if ! hash node 2>/dev/null; then
-  echo "Install curl and zip" 
-  sudo apt-get -y install curl zip unzip
-  
-  echo "Setup node source"
-  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-  
-  echo "install node"
-  sudo apt-get install -y nodejs
-
-  echo "install npm"
-  sudo apt-get install -y npm
-  
-  echo "install postgres tools"
-  sudo apt-get install -y postgresql-client-common
-  
-  echo "Switch to project folder"
-  cd /vagrant
-
-  echo "Install packages"
-  npm install
-fi
-
 # PostgreSQL install adapted from https://github.com/jackdb/pg-app-dev-vm
 # The MIT License (MIT)
 
@@ -101,16 +76,16 @@ then
 fi
 
 # Update package list and upgrade all packages
-sudo apt-get -y upgrade
+apt-get -y upgrade
 
-sudo apt-get -y install "postgresql-$PG_VERSION" "postgresql-contrib-$PG_VERSION"
+apt-get -y install "postgresql-$PG_VERSION" "postgresql-contrib-$PG_VERSION"
 
 PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
 PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
 PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 
 # Edit postgresql.conf to change listen address to '*':
-sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
 
 # Append to pg_hba.conf to add password auth:
 echo "host    all             all             all                     md5" >> "$PG_HBA"
@@ -119,7 +94,7 @@ echo "host    all             all             all                     md5" >> "$
 echo "client_encoding = utf8" >> "$PG_CONF"
 
 # Restart so that all new config is loaded:
-sudo service postgresql restart
+service postgresql restart
 
 cat << EOF | sudo su - postgres -c psql
 -- Create the database user:

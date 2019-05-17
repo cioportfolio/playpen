@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
 	echo "mounting node_modules"
 	  mount --bind /vagrant_node_modules /vagrant/node_modules
 	SHELL
-  config.vm.provision :shell, privileged: false, path: "bootstrap.sh"
+  config.vm.provision :shell, privileged: false, path: "provisionserv.sh"
+  config.vm.provision :shell, path: "provisiondb.sh"
   config.vm.provision :shell, privileged: false, run: "always", inline: <<-SHELL
     echo "Starting server"
     cd /vagrant
