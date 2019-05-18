@@ -32,6 +32,10 @@ Vagrant.configure("2") do |config|
     echo "Server started"
   SHELL
 
+  config.trigger.before [:destroy, :halt, :suspend] do |trigger|
+      trigger.run_remote = {path: "dbexport.sh"}
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

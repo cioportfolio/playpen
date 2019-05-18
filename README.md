@@ -104,15 +104,15 @@ After these commands `vagrant up` will get things going again. It will know if y
 
 This is an overview of what is in the playpen and what you can do with it. The components are amongst the most popular internet tools so you will find extensive user guides, online training, example code and plenty of help online.
 
-### public folder
+### "public" subfolder
 
-Any files you want to be part of your website can go in the `public` folder. E.g. if you follow some online guides and create a `test.html` webpage you can put it into the `public` folder and see it in your browser with:
+Any files you want to be part of your website can go in the `public` folder. By default the playpen will display `index.html` which is how you got to the ugly test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
+
+If you follow some online guides and create a new webpage e.g `test.html` you can put it into the `public` folder and see it in your browser with:
 
 ```
 localhost:3000/test.html
 ```
-
-By default the playpen will display `index.html` which is how you got to the ugly test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
 
 ### Express framework
 
@@ -120,12 +120,16 @@ The playpen includes a simple web and api framework called express. There are lo
 
 ### PostgreSQL dababase
 
-The playpen also includes the PostgresSQL database. `queries.js` includes and example of accessing the database which is used by the example api in `server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
+The playpen also includes the PostgresSQL database. `queries.js` includes an example of accessing the database which is used by the example api in `server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
 
-**Note**: if you use `vagrant destroy` you will loose any new data or data structures you have put into the database. You can use a tool like pgadmin (see earlier in this guide) to save and load the data and you can also use scripts (see the next section).
+You can use a tool like pgadmin (see optional utilities earlier in this guide) to add new dabase tables and manage the data.
+
+Each time you use vagrant to stop the playpen (e.g. `vagrant halt`) the database will exported to `dbexport.pgsql`. If you reset the playpen (e.g. `vagrant destroy`) the database will be reloaded from this export.
 
 ### Vagrant configuration
 
 `provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks.
 
-`Vagrantfile` provides the basic information which vagrant uses to build the playpen, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS. If you want to preserve the data in your database you can use the `Vagrantfile` to define shutdown and startup instructions to save and reload the data.
+`Vagrantfile` provides the basic information which vagrant uses to build the playpen, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS.
+
+`dbexport.sh` is a unix script which vagrant uses to backup the database when you stop the playpen.

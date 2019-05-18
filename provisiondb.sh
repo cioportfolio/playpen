@@ -106,11 +106,12 @@ CREATE DATABASE $APP_DB_NAME WITH OWNER=$APP_DB_USER
                                   LC_CTYPE='en_US.utf8'
                                   ENCODING='UTF8'
                                   TEMPLATE=template0;
-\c $APP_DB_NAME
-CREATE TABLE list (id integer PRIMARY KEY, notes text);
-INSERT INTO list VALUES(1,'Test message');
-ALTER TABLE list OWNER TO $APP_DB_USER;
 EOF
+
+if [ ! -f /vagrant/dbexport.pgsql ]; then
+  cp /vagrant/dbexport.template /vagrant/dbexport.pgsql
+fi
+sudo su - postgres -c "psql -d myapp" < /vagrant/dbexport.pgsql
 
 # Tag the provision time:
 date > "$PROVISIONED_ON"
