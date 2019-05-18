@@ -47,7 +47,7 @@ Your favourite search engine will help you find lists of commands and explain er
 Start up your command line and type in this command to download a copy of the playpen software:
 
 ```
-git clone git@github.com:cioportfolio/playpen.git myapp
+git clone git://github.com/cioportfolio/playpen.git myapp
 ```
 
 Typing `dir` (or `ls` on a Mac) will show a list of your folder and you will see a new `myapp` folder there. Move to that folder by typing:
