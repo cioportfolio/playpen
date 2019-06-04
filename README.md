@@ -4,22 +4,45 @@ This is a very basic setup for getting started developing simple web apps. It is
 ## Getting your computer ready
 You will need to install some basic utilities which you can easily find on the web. Use the links and pick the versions for your operating system (Windows or Mac).
 
-Download and install `git` which is a utility to help keep track of your web app files. If you have a Mac you can got to the app store and install `xcode` which includes `git` and a lot of other tools.
+Download and install `git` which is a utility to help keep track of your web app files. Use the links below to get the right version for your operating system (Windows or Mac). If you have a Mac you can got to the app store and install `xcode` which includes `git` and a lot of other tools.
+
+**Windows**
 
 ```
-https://git-scm.com/downloads
+https://git-scm.com/download/win
 ```
 
-Download and install `VirtualBox` which is a utility for a sandbox so that your coding mistakes don't mess up your precious laptop or home computer
+**Mac**
+```
+https://git-scm.com/download/mac
+```
+
+Download and install `VirtualBox` which is a utility for a sandbox so that your coding mistakes don't mess up your precious laptop or home computer. Choose Windows hosts if you have
+
+**Windows**
 
 ```
-https://www.virtualbox.org/wiki/Downloads
+https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-Win.exe
+```
+
+**Mac**
+
+```
+https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-OSX.dmg
 ```
 
 Download and install `Vagrant` which is a utility which does a load of hard work to configure the playpen for your app.
 
+**Windows**
+
 ```
-https://www.vagrantup.com/downloads.html
+https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.msi
+```
+
+**Mac**
+
+```
+https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.dmg
 ```
 
 **Optional:**
