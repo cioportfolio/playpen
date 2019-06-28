@@ -31,6 +31,12 @@ https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-Win.exe
 https://download.virtualbox.org/virtualbox/6.0.8/VirtualBox-6.0.8-130520-OSX.dmg
 ```
 
+> It is possible to get an error on some versions of the Mac operating systems. If so try these steps:
+> - Go to Settings
+> - Security & Privacy
+> - Allow the Oracle installation to proceed
+> - Attempt the installation again
+
 Download and install `Vagrant` which is a utility which does a load of hard work to configure the playpen for your app.
 
 **Windows**
