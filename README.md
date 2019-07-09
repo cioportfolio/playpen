@@ -98,14 +98,13 @@ This command is **magic**! Vagrant will start up a virtual machine, download and
 Once Vagrant has done its work you should see:
 
 ```
-    default: Starting server
-    default: App running on port 3000.
+    default: Server started
 ```
 
 Now go to a browser and in the address bar type:
 
 ```
-localhost:3000
+localhost:8080
 ```
 
 You should see a very ugly web page like this:
@@ -140,7 +139,7 @@ Any files you want to be part of your website can go in the `public` folder. By 
 If you follow some online guides and create a new webpage e.g `test.html` you can put it into the `public` folder and see it in your browser with:
 
 ```
-localhost:3000/test.html
+localhost:8080/test.html
 ```
 
 ### Express framework
@@ -157,7 +156,7 @@ Each time you use vagrant to stop the playpen (e.g. `vagrant halt`) the database
 
 ### Vagrant configuration
 
-`provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks.
+`provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks. These scripts can also be used to set up a server in a datacentre or in the cloud.
 
 `Vagrantfile` provides the basic information which vagrant uses to build the playpen, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS.
 

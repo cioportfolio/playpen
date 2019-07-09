@@ -108,10 +108,17 @@ CREATE DATABASE $APP_DB_NAME WITH OWNER=$APP_DB_USER
                                   TEMPLATE=template0;
 EOF
 
-if [ ! -f /vagrant/dbexport.pgsql ]; then
-  cp /vagrant/dbexport.template /vagrant/dbexport.pgsql
+SCRIPTPATH=
+if [ -d "/vagrant" ]; then
+  echo 'Switch to project folder if running in Vagrant'
+  SCRIPTPATH=/vagrant/
 fi
-sudo su - postgres -c "psql -d myapp" < /vagrant/dbexport.pgsql
+
+
+if [ ! -f ${SCRIPTPATH}dbexport.pgsql ]; then
+  cp ${SCRIPTPATH}dbexport.template ${SCRIPTPATH}dbexport.pgsql
+fi
+sudo su - postgres -c "psql -d myapp" < ${SCRIPTPATH}dbexport.pgsql
 
 # Tag the provision time:
 date > "$PROVISIONED_ON"

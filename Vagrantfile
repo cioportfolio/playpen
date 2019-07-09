@@ -26,9 +26,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, privileged: false, path: "provisionserv.sh"
   config.vm.provision :shell, path: "provisiondb.sh"
   config.vm.provision :shell, privileged: false, run: "always", inline: <<-SHELL
-    echo "Starting server"
-    cd /vagrant
-    nohup node server.js &>/vagrant/node.log & 2>/vagrant/node_error.log &
     echo "Server started"
   SHELL
 
