@@ -52,7 +52,7 @@ if ! hash node 2>/dev/null; then
   npm install
 
   echo "Setting up server with pm2"
-  PORT=3000 pm2 start server.js
+  PORT=3000 pm2 start server.js --name playpen
   pm2 save
-  sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u vagrant --hp $HOME
+  sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u $USER --hp $HOME
 fi

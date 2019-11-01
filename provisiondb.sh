@@ -114,7 +114,6 @@ if [ -d "/vagrant" ]; then
   SCRIPTPATH=/vagrant/
 fi
 
-
 if [ ! -f ${SCRIPTPATH}dbexport.pgsql ]; then
   cp ${SCRIPTPATH}dbexport.template ${SCRIPTPATH}dbexport.pgsql
 fi
