@@ -1,5 +1,5 @@
-# A simple web development playpen
-This is a very basic setup for getting started developing simple web apps. It is designed to give beginners the satisfaction of creating an interactive website very quickly. Since it runs inside a virtual machine beginners can play around, mess things up and easily reset their playpen. It also makes it realatively easy to move into the cloud when they are ready.
+# An intermediate web development playpen
+This is a basic setup for getting started developing simple web apps. It is designed to give beginners the satisfaction of creating an interactive website very quickly. Since it runs inside a virtual machine beginners can play around, mess things up and easily reset their playpen. It also makes it realatively easy to move into the cloud when they are ready.
 
 ## Getting your computer ready
 You will need to install some basic utilities which you can easily find on the web. Use the links and pick the versions for your operating system (Windows or Mac).
@@ -107,11 +107,8 @@ Now go to a browser and in the address bar type:
 localhost:8080
 ```
 
-You should see a very ugly web page like this:
+You should see a [reactjs](https://reactjs.org) branded web page with some strange data like this:
 
->
-> # Hello world
-> ## Data
 >[ { "id": 1, "notes": "Test message" } ]
 
 Congratulations! The playpen is running and you can use it to develop your apps.
@@ -126,7 +123,7 @@ You have already seen what `vagrant up` can do. Here are a few more basic comman
 
 After these commands `vagrant up` will get things going again. It will know if you have halted or destroyed the playpen and do the minimum it needs to get running again.
 
-`vagrant ssh` will log you into the playpen and start its command line so you can run other commands. The playpen is actually a unix computer running inside you laptop. You can find out how to use it on the web.
+`vagrant ssh` will log you into the playpen and start its command line so you can run other commands. The playpen is actually a unix computer running inside you laptop. You can [find out how to use it](https://link.medium.com/urDWdNDbk4) on the web.
 
 ## Playpen content
 
@@ -134,7 +131,7 @@ This is an overview of what is in the playpen and what you can do with it. The c
 
 ### "public" subfolder
 
-Any files you want to be part of your website can go in the `public` folder. By default the playpen will display `index.html` which is how you got to the ugly test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
+Any files you want to be part of your website can go in the `public` folder. By default the playpen will display `index.html` which is how you got to the simple test page. You can change or replace `index.html` to see how `html`, `css`, `javascript` and other web technologies work.
 
 If you follow some online guides and create a new webpage e.g `test.html` you can put it into the `public` folder and see it in your browser with:
 
@@ -142,21 +139,28 @@ If you follow some online guides and create a new webpage e.g `test.html` you ca
 localhost:8080/test.html
 ```
 
+### React framework
+The playpen includes a web application called React and uses this to generate the basic starter page you have seen. You can do alot with basic web tools but React is a good next step for interactive web sites. React originated inside Facebook but is now free to use and there are loads of online help, tutorials and add ons when you need them. You will find the React code in the `src` folder. Most of this code was generated using the [create-react-app](https://github.com/facebook/create-react-app#create-react-app--) tool.
+
 ### Express framework
 
-The playpen includes a simple web and api framework called express. There are lots of different frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `index.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption.
+The playpen includes a simple api server framework called express. There are lots of different server frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `src/server/server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `src/App.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption.
 
 ### PostgreSQL dababase
 
-The playpen also includes the PostgresSQL database. `queries.js` includes an example of accessing the database which is used by the example api in `server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
+The playpen also includes the PostgresSQL database. `src/server/queries.js` includes an example of accessing the database which is used by the example api in `src/server/server.js`. Online help is available to show you how to add new data into the database and access it through javascript. The details you need to connect to the database are at the top of `queries.js`.
 
 You can use a tool like pgadmin (see optional utilities earlier in this guide) to add new dabase tables and manage the data.
 
 Each time you use vagrant to stop the playpen (e.g. `vagrant halt`) the database will exported to `dbexport.pgsql`. If you reset the playpen (e.g. `vagrant destroy`) the database will be reloaded from this export.
 
+### Nginx web server
+
+Both React and Express use a small web server called node. The playpen could work with node alone but I have also included a professional grade web server, nginx. The main reason to include nginx is to make it easier migrate playpen projects into a data centre or onto the cloud.
+
 ### Vagrant configuration
 
-`provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks. These scripts can also be used to set up a server in a datacentre or in the cloud.
+`provisionserv.sh` and `provisiondb.sh` are unix scripts which do most of the hardwork when you ran `vagrant up` for the first time. Changing these are probably not for beginners but the vagrant website includes extensive how-to guides. You can change the scripts and rebuild the playpen with additional software or different components e.g. different databases and server frameworks. These scripts can also be used to set up a server in a data centre or in the cloud.
 
 `Vagrantfile` provides the basic information which vagrant uses to build the playpen, such as what operating system to use and what scripts to run. The vagrant website provides lots of instructions and how-tos. For example, you can get vagrant to deploy your web app onto a cloud service such as Amazon AWS.
 
