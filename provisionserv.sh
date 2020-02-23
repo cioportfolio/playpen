@@ -4,10 +4,10 @@ sudo apt-get update
 echo "Test if node already installed"
 if ! hash node 2>/dev/null; then
   echo "Install curl and zip" 
-  sudo apt-get -y install curl zip unzip
+  sudo  DEBIAN_FRONTEND=noninteractive apt-get -y install curl zip unzip
   
   echo "Setup node source"
-  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
   
   echo "install node"
   sudo apt-get install -y nodejs
