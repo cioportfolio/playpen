@@ -3,7 +3,7 @@ const pool = new Pool({
     user: 'myapp',
     host: 'localhost',
     database: 'myapp',
-    password: 'dbpass',
+    password: process.env.DBPASS,
     port: 5432,
 })
 
