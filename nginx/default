@@ -27,21 +27,17 @@ server {
 
 	server_name _;
 
-	location / {
-		proxy_pass http://localhost:3000/;
+	# location / {
+	# 	proxy_pass http://localhost:3000;
+	# }
+	
+	location /api/ {
+		proxy_pass http://localhost:3000;
 	}
 
-    location ~ ^/(.*)$ { 
-        proxy_pass http://localhost:3000/$1$is_args$args; 
-    }
-
-    # location ~ ^/apppath/(.*)$ { 
-    #    proxy_pass http://localhost:3000/$1$is_args$args; 
-    # }
-
-	# location / {
-	#	# First attempt to serve request as file, then
-	#	# as directory, then fall back to displaying a 404.
-	#	try_files $uri $uri/ =404;
-	# }
+	location / {
+	# First attempt to serve request as file, then
+	# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
 }

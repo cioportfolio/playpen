@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, privileged: false, path: "provisionserv.sh"
   config.vm.provision :shell, path: "provisiondb.sh"
   config.vm.provision :shell, privileged: false, run: "always", inline: <<-SHELL
+    sudo service nginx restart
     echo "Server started"
   SHELL
 
@@ -43,6 +44,7 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3001, host: 3001
   config.vm.network "forwarded_port", guest: 5432, host: 5432
   config.vm.network "forwarded_port", guest: 80, host: 8080
 

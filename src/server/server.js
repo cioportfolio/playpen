@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const db = require('./queries')
+const db = require('./queries.js')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.use(bodyParser.json())
 app.use(
@@ -11,9 +11,9 @@ app.use(
     })
 )
 
-app.use(express.static('public'))
+/* app.use(express.static('public')) */
 
-app.get('/items', db.getItems)
+app.get('/api/items', db.getItems)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

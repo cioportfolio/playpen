@@ -12,8 +12,8 @@ if ! hash node 2>/dev/null; then
   echo "install node"
   sudo apt-get install -y nodejs
 
-  echo "install npm"
-  sudo apt-get install -y npm
+#  echo "install npm"
+#  sudo apt-get install -y npm
 
   echo "install pm2"
   sudo npm install pm2@latest -g
@@ -29,30 +29,30 @@ if ! hash node 2>/dev/null; then
   SCRIPTPATH=
   if [ -d "/vagrant" ]; then
     echo 'Switch to project folder if running in Vagrant'
-    SCRIPTPATH=/vagrant/
+    echo 'cd /vagrant' >> $HOME/.profile
+    cd /vagrant
   fi
 
-  echo "update nginx configuration"
-  sudo cp -rf ${SCRIPTPATH}nginx/default /etc/nginx/sites-available/default
-  sudo chmod 644 /etc/nginx/sites-available/default
+  echo "update nginx to point to local configuration"
+  sudo rm /etc/nginx/sites-available/default
+  sudo ln -s $(pwd)/nginx/default /etc/nginx/sites-available/default
+  sudo chmod 644 nginx/default
   sudo service nginx restart
+
+  echo "Install packages"
+  npm install
+
+  echo "build react static site"
+  npm run build
 
   # clean /var/www
   sudo rm -Rf /var/www
 
   # symlink /var/www => /vagrant
-  ln -s ${SCRIPTPATH}public /var/www
+  sudo ln -s $(pwd)/build /var/www
   
-  if [ -d "/vagrant" ]; then
-    echo 'Switch to project folder if running in Vagrant'
-    cd /vagrant
-  fi
-
-  echo "Install packages"
-  npm install
-
-  echo "Setting up server with pm2"
-  PORT=3000 pm2 start server.js --name playpen
+  echo "Setting up api server with pm2"
+  PORT=3000 pm2 start -n api npm -- run start:server
   pm2 save
   sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u $USER --hp $HOME
 fi
