@@ -42,6 +42,9 @@ if ! hash node 2>/dev/null; then
   echo "Install packages"
   npm install
 
+  echo "Generate secure key"
+  ssh-keygen -q -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
+
   echo "build react static site"
   npm run build
 
@@ -50,6 +53,13 @@ if ! hash node 2>/dev/null; then
 
   # symlink /var/www => /vagrant
   sudo ln -s $(pwd)/build /var/www
+  echo "Set up DBPASS variable"
+  echo "export DBPASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)" > /home/vagrant/dbpass.sh
+  source /home/vagrant/dbpass.sh
+
+
+
+
   
   echo "Setting up api server with pm2"
   PORT=3000 pm2 start -n api npm -- run start:server
