@@ -6,7 +6,9 @@ If you want to try something even easier to get started have a look at [this beg
 
 ## Getting your computer ready
 
-You will need to install some basic utilities which you can easily find on the web. Follow [these instructions](https://cioportfolio.github.io/gettingstarted/pcsetup#getting-your-computer-ready) for more details. You will only need to do this once on each machine that you work on. There are also some [instructions on using your computer's command line](https://cioportfolio.github.io/gettingstarted/pcsetup#using-the-command-line).
+You will need to install some basic utilities which you can easily find on the web. 
+
+First of all download and install Docker Desktop from the [Docker website](https://www.docker.com/products/docker-desktop). You will only need to do this once on each machine that you work on. There are also some [instructions on using your computer's command line](https://cioportfolio.github.io/gettingstarted/pcsetup#using-the-command-line) which will come in handy.
 
 ## Setting up the playpen
 
@@ -27,18 +29,24 @@ Typing `dir` (or `ls`) will reveal a load of files for the playpen. We will expl
 Type the following command:
 
 ```bash
-vagrant up
+docker build -t myimg .
 ```
 
-This command is **magic**! Vagrant will start up a virtual machine, download and install all the software it needs and run a simple web server. You will see a load of obscure messages scroll through your command line window. You can ignore these if everything works (and if something goes wrong the explanation will be in this log somewhere).
+This command is **magic**! Docker will start up a virtual machine, download and install all the software it needs and run a simple web server. You will see a load of obscure messages scroll through your command line window. You can ignore these if everything works (and if something goes wrong the explanation will be in this log somewhere).
 
 Once Vagrant has done its work you should see:
 
 ```bash
-    default: Server started
+Successfully tagged myimg:latest
 ```
 
-Now go to a browser and in the address bar type:
+Next, you can run the Docker image you have just built with
+
+```bash
+docker run --name mycont -itdp 8080:80 myimg
+```
+
+Docker will print a long random looking string which is an internal reference. Wait a minute or so for the container to go through its start up. Now go to a browser and in the address bar type:
 
 ```bash
 localhost:8080
@@ -49,6 +57,12 @@ You should see a [reactjs](https://reactjs.org) branded web page with some stran
 >[ { "id": 1, "notes": "Test message" } ]
 
 Congratulations! The playpen is running and you can use it to develop your apps.
+
+If you see:
+
+>Loading ...
+
+Just a wait a minute for everything to start up and try again.
 
 ## Playpen content
 
