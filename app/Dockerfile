@@ -11,10 +11,10 @@ RUN mkdir /vagrant
 WORKDIR /vagrant
 COPY --chown=vagrant:vagrant . .
 USER vagrant
-RUN bash bin/provisionall.sh
+RUN bash provisionall.sh
 EXPOSE 80
 CMD sudo service nginx restart && \
       sudo service postgresql restart && \
       . ~/dbpass.sh && \
-      PORT=3000 pm2 start -n api node -- api/src/server.js && \
+      PORT=3000 pm2 start -n api npm -- run start:server && \
       bash

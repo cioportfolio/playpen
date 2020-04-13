@@ -12,9 +12,6 @@ if ! hash node 2>/dev/null; then
   echo "install node"
   sudo apt-get install -y nodejs
 
-#  echo "install npm"
-#  sudo apt-get install -y npm
-
   echo "install pm2"
   sudo npm install pm2@latest -g
   
@@ -35,34 +32,23 @@ if ! hash node 2>/dev/null; then
 
   echo "update nginx to point to local configuration"
   sudo rm /etc/nginx/sites-available/default
-  sudo ln -s $(pwd)/nginx/default /etc/nginx/sites-available/default
-  sudo chmod 644 nginx/default
+  sudo ln -s $(pwd)/web/default /etc/nginx/sites-available/default
+  sudo chmod 644 web/default
   sudo service nginx restart
 
   echo "Install packages"
+  cd api
   npm install
+  cd ../app
+  echo "build react static site"
+  npm install
+  npm run build
+  cd ..
 
   echo "Generate secure key"
   ssh-keygen -q -N '' -f ~/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
 
-  echo "build react static site"
-  npm run build
-
-  # clean /var/www
-  sudo rm -Rf /var/www
-
-  # symlink /var/www => /vagrant
-  sudo ln -s $(pwd)/build /var/www
   echo "Set up DBPASS variable"
   echo "export DBPASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)" > /home/vagrant/dbpass.sh
   source /home/vagrant/dbpass.sh
-
-
-
-
-  
-  echo "Setting up api server with pm2"
-  PORT=3000 pm2 start -n api npm -- run start:server
-  pm2 save
-  sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u $USER --hp $HOME
 fi

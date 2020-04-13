@@ -1,0 +1,15 @@
+version: '3.0'
+services:
+  play:
+    build: .
+    ports:
+    - "8080:80"
+    volumes:
+    - ./api/src:/vagrant/api/src
+    - ./app/src:/vagrant/app/src
+    - ./app/public:/vagrant/app/public
+    - ./db/datafiles:/vagrant/db/datafiles
+    - ./web/www:/vagrant/web/www
+    stdin_open: true
+    tty: true
+    user: vagrant

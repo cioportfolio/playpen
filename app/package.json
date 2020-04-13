@@ -1,10 +1,8 @@
 {
-  "name": "playpen-rect",
-  "version": "0.1.0",
+  "name": "playpen-app",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
-    "pg": "^7.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
@@ -13,10 +11,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "npm-run-all --parallel watch:server start:web",
-    "start:web": "react-scripts start",
-    "start:server": "node src/server/server.js",
-    "watch:server": "nodemon --watch src/server src/server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

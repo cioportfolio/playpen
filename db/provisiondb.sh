@@ -31,40 +31,11 @@ PG_VERSION=10
 # Changes below this line are probably not necessary
 ###########################################################
 print_db_usage () {
-  echo "Your PostgreSQL database has been setup and can be accessed on your local machine on the forwarded port (default: 15432)"
-  echo "  Host: localhost"
-  echo "  Port: 15432"
-  echo "  Database: $APP_DB_NAME"
-  echo "  Username: $APP_DB_USER"
+  echo "Your PostgreSQL database has been setup"
   echo "  Password: $APP_DB_PASS"
-  echo ""
-  echo "Admin access to postgres user via VM:"
-  echo "  vagrant ssh"
-  echo "  sudo su - postgres"
-  echo ""
-  echo "psql access to app database user via VM:"
-  echo "  vagrant ssh"
-  echo "  sudo su - postgres"
-  echo "  PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost $APP_DB_NAME"
-  echo ""
-  echo "Env variable for application development:"
-  echo "  DATABASE_URL=postgresql://$APP_DB_USER:$APP_DB_PASS@localhost:15432/$APP_DB_NAME"
-  echo ""
-  echo "Local command to access the database via psql:"
-  echo "  PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost -p 15432 $APP_DB_NAME"
 }
 
 export DEBIAN_FRONTEND=noninteractive
-
-PROVISIONED_ON=/etc/vm_provision_on_timestamp
-if [ -f "$PROVISIONED_ON" ]
-then
-  echo "VM was already provisioned at: $(cat $PROVISIONED_ON)"
-  echo "To run system updates manually login via 'vagrant ssh' and run 'apt-get update && apt-get upgrade'"
-  echo ""
-  print_db_usage
-  exit
-fi
 
 PG_REPO_APT_SOURCE=/etc/apt/sources.list.d/pgdg.list
 if [ ! -f "$PG_REPO_APT_SOURCE" ]
@@ -115,15 +86,11 @@ if [ -d "/vagrant" ]; then
   SCRIPTPATH=/vagrant/
 fi
 
-if [ ! -f ${SCRIPTPATH}dbexport.pgsql ]; then
-  cp ${SCRIPTPATH}dbexport.template ${SCRIPTPATH}dbexport.pgsql
+if [ ! -f ${SCRIPTPATH}db/datafiles/dbexport.pgsql ]; then
+  cp ${SCRIPTPATH}db/datafiles/dbexport.template ${SCRIPTPATH}db/datafiles/dbexport.pgsql
 fi
-sudo su - postgres -c "psql -d myapp" < ${SCRIPTPATH}dbexport.pgsql
-
-# Tag the provision time:
-date > "$PROVISIONED_ON"
+sudo su - postgres -c "psql -d myapp" < ${SCRIPTPATH}db/datafiles/dbexport.pgsql
 
 echo "Successfully created PostgreSQL dev virtual machine."
 echo ""
 print_db_usage
-
