@@ -4,6 +4,7 @@ services:
     build: .
     ports:
     - "8080:80"
+    - "5432:5432"
     volumes:
     - ./api/src:/vagrant/api/src
     - ./app/src:/vagrant/app/src
