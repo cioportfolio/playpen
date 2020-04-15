@@ -7,12 +7,12 @@ const pool = new Pool({
     port: 5432,
 })
 
-const getItems = (request, response) => {
+function getItems(processItems) {
     pool.query('SELECT * FROM list ORDER BY id', (error, results) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        processItems(results.rows)
     })
 }
 

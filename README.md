@@ -82,13 +82,23 @@ The playpen includes a simple api server framework called express. There are lot
 
 ### PostgreSQL dababase
 
-The playpen also includes the PostgresSQL database. `api/src/queries.js` includes an example of accessing the database which is used by the example api in `api/src/server.js`. Online help is available to show you how to add new data into the database and access it through javascript. Most of the details you need to connect to the database are at the top of `queries.js` but the password is generated randomly. To find it for your copy of the playpen use:
+The playpen also includes the PostgresSQL database. `api/src/queries.js` includes an example of accessing the database which is used by the api in `api/src/server.js`. Online help is available to show you how to add new data into the database and access it through javascript using the [pg](https://node-postgres.com/) library.
+
+You can back up the database with:
+
+```bash
+docker-compose run play /vagrant/db/dbexport.sh
+```
+
+This will save the current data in `db/datafiles/dbexport.pgsql` and use this to load the database if you need to rebuild the playpen.
+
+You can use a tool like pgadmin ([download site](https://www.pgadmin.org/download/)) to add new dabase tables and manage the data. Most of the details you need to connect to the database are at the top of `queries.js` but the password is generated randomly. To find it for your copy of the playpen use:
 
 ```bash
 docker-compose run play sudo su - vagrant -c ". ~/dbpass.sh && echo $DBPASS"
 ```
 
-You can use a tool like pgadmin ([download site](https://www.pgadmin.org/download/)) to add new dabase tables and manage the data.
+
 
 ### Nginx web server
 

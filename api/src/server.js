@@ -13,7 +13,13 @@ app.use(
 
 /* app.use(express.static('public')) */
 
-app.get('/api/items', db.getItems)
+function getItems (request, response) {
+    db.getItems(rows => {
+        return response.status(200).json(rows)
+    })
+}
+
+app.get('/api/items', getItems)
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
