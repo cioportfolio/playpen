@@ -11,6 +11,16 @@ services:
     - ./app/public:/vagrant/app/public
     - ./db/datafiles:/vagrant/db/datafiles
     - ./web/www:/vagrant/web/www
+    - ./web/default:/vagrant/web/default
     stdin_open: true
     tty: true
     user: vagrant
+    command: bash -c "
+      sudo service nginx restart
+      && sudo service postgresql restart
+      && . ~/dbpass.sh
+      && PORT=3001 pm2 start -n api node -- api/src/server.js
+      && cd app
+      && PORT=3000 pm2 start -n react npm -- start
+      && echo 'Playpen Started'
+      && bash"

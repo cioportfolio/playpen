@@ -42,7 +42,7 @@ if ! hash node 2>/dev/null; then
   cd ../app
   echo "build react static site"
   npm install
-  npm run build
+#  npm run build
   cd ..
 
   echo "Generate secure key"
