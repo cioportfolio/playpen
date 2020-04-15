@@ -78,7 +78,7 @@ The playpen includes a web application called React and uses this to generate th
 
 ### Express framework
 
-The playpen includes a simple api server framework called express. There are lots of different server frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `api/src/server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `app/src/App.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption. The playpen uses a utility called [pm2](https://pm2.keymetrics.io/docs/usage/quick-start/) to manage the api server so when you have made changes you can just restart the playpen.
+The playpen includes a simple api server framework called express. There are lots of different server frameworks around but the advantage of express is that it uses the same javascript language as your web pages. You will find all of the express configuration in `api/src/server.js`. You can change `server.js` to handle api requests or generate webpages. `server.js` includes one simple api and `app/src/App.js` has a line of code to call it. You can also change `server.js` to add ready-made express components for all sort of things such as handling user data, signing in to account and encryption. The playpen uses a utility called [pm2](https://pm2.keymetrics.io/docs/usage/quick-start/) to manage the api server and automatically restart it when you make changes.
 
 ### PostgreSQL dababase
 
