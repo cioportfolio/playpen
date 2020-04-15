@@ -72,15 +72,9 @@ localhost:8080/test.html
 
 ### React framework
 
-The playpen includes a web application called React and uses this to generate the basic starter page you have seen. You can do alot with basic web tools but React is a good next step for interactive web sites. React originated inside Facebook but is now free to use and there are loads of online help, tutorials and add ons when you need them. You will find the React code in the `app` folder within the `public` and `src` subfolders. Most of this code was generated using the [create-react-app](https://github.com/facebook/create-react-app#create-react-app--) tool. Once you have made changes you will need to rebuild your app with the commands below. **WARNING**: This command will replace everying in the `build` folder.
+The playpen includes a web application called React and uses this to generate the basic starter page you have seen. You can do alot with basic web tools but React is a good next step for interactive web sites. React originated inside Facebook but is now free to use and there are loads of online help, tutorials and add ons when you need them. You will find the React code in the `app` folder within the `public` and `src` subfolders. Most of this code was generated using the [create-react-app](https://github.com/facebook/create-react-app#create-react-app--) tool. The playpen should automatically pick up any changes you make which you can see by refreshing your bowser. If you have made some mistakes you will see some error messages which you can investigate using your favourite search engine. Once the build has finished you can start the playpen again to see the results.
 
-First go to your command line and log into the playpen virtual machine
-
-```bash
-docker-compose run play sudo su - vagrant -c "cd /vagrant/app && npm run build"
-```
-
-If you have made some mistakes you will see some error messages which you can investigate using your favourite search engine. Once the build has finished you can start the playpen again to see the results.
+**Warning** The playpen will look in `web/www` for files first so if you have `index.html` in `web/www` you won't see your react app. Just delete or rename the `www/web` files to see your react app.
 
 ### Express framework
 
