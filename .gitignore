@@ -23,6 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 ubuntu*.log
 
+# don't put real passwords into the repo
+.env
 
 # vagrant
 .vagrant/
