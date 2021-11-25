@@ -1,27 +1,38 @@
-version: '3.0'
+version: '3.8'
+
 services:
-  play:
-    build: .
-    ports:
-    - "8080:80"
-    - "5432:5432"
+  db:
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=$DB_PASS
     volumes:
-    - ./api/src:/vagrant/api/src
-    - ./app/src:/vagrant/app/src
-    - ./app/public:/vagrant/app/public
-    - ./db/datafiles:/vagrant/db/datafiles
-    - ./web/www:/vagrant/web/www
-    - ./web/default:/vagrant/web/default
-    stdin_open: true
-    tty: true
-    user: vagrant
-    command: bash -c "
-      sudo service nginx restart
-      && sudo service postgresql restart
-      && . ~/dbpass.sh
-      && cd api/src
-      && PORT=3001 pm2 start -n api server.js --watch
-      && cd ../../app
-      && PORT=3000 pm2 start -n react npm -- start
-      && echo 'Playpen Started'
-      && bash"
+      - ./db/data:/data
+
+  web:
+    depends_on:
+      - api
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./app
+    ports:
+      - "3000:80"
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    depends_on:
+      - db
+    environment:
+      - DB_PASS
+      - DB_IP=db
+
+  admin:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

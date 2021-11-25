@@ -28,4 +28,4 @@ ubuntu*.log
 .vagrant/
 
 # local data
-*.pgsql
+*.sql

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if [ ! -f /data/dbexport.sql ]; then
+  cp /data/dbexport.template /data/dbexport.sql
+fi
+psql -U postgres -d postgres < /data/dbexport.sql
