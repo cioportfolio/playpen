@@ -1,8 +1,11 @@
 FROM postgres
 WORKDIR /docker-entrypoint-initdb.d
 COPY ./import ./import.sh
+WORKDIR /
+USER postgres
+RUN mkdir data
+USER ROOT
 WORKDIR /data
-RUN chown postgres /data
 COPY ./data/ ./
 WORKDIR /bin
 COPY ./import ./
