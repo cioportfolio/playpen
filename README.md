@@ -30,7 +30,7 @@ cd myapp
 
 Typing `dir` (or `ls`) will reveal a load of files for the playpen. We will explain what these are later. For now let's get the playpen going.
 
-First go and change the password in the `.env` file to something new before you forget.
+First rename the `.env_template` file to `.env`. Then go and change the password in the `.env` file to something new before you forget.
 
 Type the following command:
 

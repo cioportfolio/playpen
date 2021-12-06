@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
       context: ./app
     ports:
-      - "3000:80"
+      - "3000:$APP_PORT"
 
   api:
     build:
@@ -35,4 +35,4 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8080:$ADMIN_PORT
