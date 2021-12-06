@@ -8,8 +8,6 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=$DB_PASS
-    volumes:
-      - ./db/data:/data
 
   web:
     depends_on:
