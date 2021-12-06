@@ -2,7 +2,7 @@ FROM postgres
 WORKDIR /docker-entrypoint-initdb.d
 COPY ./import ./import.sh
 WORKDIR /data
-RUN chmod +w /data
+RUN chown postgres /data
 COPY ./data/ ./
 WORKDIR /bin
 COPY ./import ./
