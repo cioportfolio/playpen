@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 echo "Backing up to dbexport.pgsql"
-pg_dump -c -U postgres postgres > /data/dbexport.sql
+pg_dump -c -U postgres postgres > /var/data/dbexport.sql
